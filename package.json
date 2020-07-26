@@ -1,0 +1,23 @@
+{
+	"name": "whois",
+	"version": "1.0.0",
+	"description": "Slack bot which will give info about the user",
+	"main": "index.js",
+	"repository": "https://github.com/nimish-gupta/whois",
+	"author": "Nimish Gupta",
+	"license": "MIT",
+	"private": false,
+	"devDependencies": {
+		"@types/node": "^14.0.26",
+		"nodemon": "^2.0.4",
+		"rimraf": "^3.0.2",
+		"ts-node": "^8.10.2",
+		"tsc": "^1.20150623.0",
+		"typescript": "^3.9.7"
+	},
+	"scripts": {
+		"start:dev": "nodemon",
+		"build": "rimraf ./build && tsc",
+		"start": "yarn build && node build/index.js"
+	}
+}
