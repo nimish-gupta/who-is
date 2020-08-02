@@ -13,9 +13,9 @@ package:
     - .env
 
 functions:
-  hello:
-    handler: src/handler.slackWhoIs
+  api:
+    handler: src/server.handler
     events:
-      - http:
-          path: slack/whois
-          method: post
+      - http: ANY /
+
+      - http: 'ANY {proxy+}'
