@@ -34,7 +34,6 @@ const fetchIntro = async (clientId: string): Promise<IFetchIntro> => {
 		const {
 			data: { intros },
 		} = (await response.json()) as ISlackResponse;
-		console.log(intros);
 
 		if (intros.length === 0) {
 			return { success: false, msg: 'Sorry intro not found for the user ' };
