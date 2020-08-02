@@ -1,17 +1,22 @@
-name: Deploy
-
 on:
   push:
     branches:
       - master
-
+name: Deploy master branch
 jobs:
-  build:
+  deploy:
+    name: deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: akhileshns/heroku-deploy@v3.3.6 # This is the action
+      - uses: actions/checkout@master
+      - name: npm install
+        uses: actions/npm@master
         with:
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: 'who-is-bot' #Must be unique in Heroku
-          heroku_email: 'nimishgupta18396@gmail.com'
+          args: install
+      - name: serverless deploy
+        uses: serverless/github-action@master
+        with:
+          args: deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
