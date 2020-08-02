@@ -1,0 +1,21 @@
+service: whois
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+
+package:
+  exclude:
+    - .env
+
+functions:
+  hello:
+    handler: src/handler.slackWhoIs
+    events:
+      - http:
+          path: slack/whois
+          method: post
