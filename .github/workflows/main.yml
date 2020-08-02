@@ -8,12 +8,15 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
-      - run: npm ci
-      - name: serverless deploy
-        uses: serverless/github-action@master
+      - uses: actions/checkout@v2
+      - name: Installing Dependencies
+        uses: borales/actions-yarn@v2.0.0
         with:
-          args: deploy
+          cmd: install
+      - name: Deploying
+        uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: deploy
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
