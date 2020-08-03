@@ -1,5 +1,3 @@
-import fetch from 'node-fetch';
-
 import fetchIntro from '../fetchIntro';
 
 const getSlackClientId = (text: string): string => {
@@ -25,9 +23,11 @@ export interface ISlackRequest {
 	response_url: string;
 }
 
+export type TSlackResponse = Record<'text', string>;
+
 export const sendSlackResponse = async (
 	body: ISlackRequest
-): Promise<boolean> => {
+): Promise<TSlackResponse> => {
 	let text = 'User not found';
 	try {
 		const clientId = getSlackClientId(body.text);
@@ -40,12 +40,7 @@ export const sendSlackResponse = async (
 		text = sendErrorMessage(error.message);
 	}
 
-	await fetch(body.response_url, {
-		method: 'POST',
-		body: JSON.stringify({ text }),
-	});
-
-	return true;
+	return { text };
 };
 
 export default sendSlackResponse;
