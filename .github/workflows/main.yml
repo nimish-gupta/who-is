@@ -13,9 +13,10 @@ jobs:
         run: yarn install
       - name: Decrypting Environment Secrets
         run: yarn decrypt:env
+        env:
+          BOT_ENCRYPTION_KEY: ${{ secrets.BOT_ENCRYPTION_KEY }}
       - name: Deploying
         run: yarn deploy:prod
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          BOT_ENCRYPTION_KEY: ${{ secrets.BOT_ENCRYPTION_KEY }}
