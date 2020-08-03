@@ -10,17 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Installing Dependencies
-        uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: install
+        run: yarn install
       - name: Decrypting Environment Secrets
-        uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: decrypt:env
+        run: yarn decrypt:env
       - name: Deploying
-        uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: deploy:prod
+        run: yarn deploy:prod
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
