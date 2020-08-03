@@ -4,9 +4,14 @@ plugins:
   - serverless-plugin-typescript
   - serverless-offline
 
+custom:
+  stage: ${opt:stage, 'dev'}
+
 provider:
   name: aws
   runtime: nodejs12.x
+  environment:
+    SLACK_DATA_URL: ${file(./config.js):${self:custom.stage}.SLACK_DATA_URL}
 
 package:
   exclude:
